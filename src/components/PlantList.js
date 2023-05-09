@@ -16,6 +16,7 @@ function PlantList() {
 
     <ul className="cards">
       {/*adding the props needed*/}
+      {/* i passd a prop for soldOutt*/}
       {plants.map((id,name, image, price) => (
         <PlantCard 
          key={id}
@@ -23,6 +24,8 @@ function PlantList() {
          id ={id}
          image={image}
          price ={price}
+         
+         soldOut ={soldOut}
       />
       )
       )}
