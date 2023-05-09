@@ -1,35 +1,38 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import PlantCard from "./PlantCard";
 
-
 function PlantList() {
-  //creating a useState
-  const [plants, setPlants] = useState([])
+  const [plants, setPlants] = useState([]);
+  //a state to check if data is working
+  const [loading, setLoading] = useState(true);
 
- //already imported the useEffect
- useEffect (() => {
-   fetch("http://localhost:6001/plants")
-   .then((response) => response.json())
-   .then((data) => setPlants(data));
- })
+  //fetching data changed the local host
+  useEffect(() => {
+    fetch("http://localhost:8000/plants")
+      .then((response) => response.json())
+      .then((data) => { 
+        console.log(data);
+        setPlants(data);
+        setLoading(false);
+      });
+  }, []);
+///if there is no data
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-
     <ul className="cards">
-      {/*adding the props needed*/}
-      {/* i passd a prop for soldOutt*/}
-      {plants.map((id,name, image, price) => (
-        <PlantCard 
-         key={id}
-         name = {name}
-         id ={id}
-         image={image}
-         price ={price}
-         
-         soldOut ={soldOut}
-      />
-      )
-      )}
-      </ul>
+      {plants.map(({ id, name, image, price, soldOut }) => (
+        <PlantCard
+          key={id}
+          name={name}
+          image={image}
+          price={price}
+          soldOut={soldOut}
+        />
+      ))}
+    </ul>
   );
 }
 
