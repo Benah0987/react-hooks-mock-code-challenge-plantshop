@@ -6,7 +6,8 @@ import Search from "./Search";
 function PlantPage() {
   return (
     <main>
-      <NewPlantForm />
+      {/*definimg props*/}
+      <NewPlantForm setPlants={setPlants} plants={plants} />
       <Search />
       <PlantList />
     </main>
