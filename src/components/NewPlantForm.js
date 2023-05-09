@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 
-function NewPlantForm({ setPlants, plants }) {
+
+//passed two props to help with updating 
+function NewPlantForm({ setPlants, ants }) {
+  //used to store the user input for the corresponding form
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // creates a new plant object using the data in the state variables
     const newPlant = {
       name: name,
       image: image,

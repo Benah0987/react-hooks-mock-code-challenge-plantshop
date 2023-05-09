@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import NewPlantForm from "./NewPlantForm";
 import PlantList from "./PlantList";
 import Search from "./Search";
@@ -13,7 +13,7 @@ function PlantPage() {
       
       <NewPlantForm setPlants={setPlants} plants={plants} />
       <Search />
-      <PlantList plants={plants}/>
+      <PlantList />
     </main>
   );
 }
