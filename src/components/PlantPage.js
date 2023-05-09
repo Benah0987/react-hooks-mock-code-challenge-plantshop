@@ -4,12 +4,16 @@ import PlantList from "./PlantList";
 import Search from "./Search";
 
 function PlantPage() {
+  
+  //define the props
+  const [plants, setPlants] = useState([])
+
   return (
     <main>
-      {/*definimg props*/}
+      
       <NewPlantForm setPlants={setPlants} plants={plants} />
       <Search />
-      <PlantList />
+      <PlantList plants={plants}/>
     </main>
   );
 }

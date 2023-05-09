@@ -1,24 +1,19 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
+function NewPlantForm({ setPlants, plants }) {
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const [price, setPrice] = useState("");
 
-//passing props to child
-//adding plant form
-function NewPlantForm({plants, setPlants}) {
-  //setting state for evrytime i add a new plant
-  const [newPlant, setnewPlant] = useState([])
-
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-  
-    const formData = new FormData(e.target);
-  
     const newPlant = {
-      name: formData.get("name"),
-      image: formData.get("image"),
-      price: parseFloat(formData.get("price")),
+      name: name,
+      image: image,
+      price: parseFloat(price),
       soldOut: false,
     };
-  
+
     fetch("http://localhost:8000/plants", {
       method: "POST",
       headers: {
@@ -29,21 +24,39 @@ function NewPlantForm({plants, setPlants}) {
       .then((response) => response.json())
       .then((data) => {
         setPlants([...plants, data]);
-        setnewPlant(data);
+        setName("");
+        setImage("");
+        setPrice("");
       })
       .catch((error) => console.error(error));
-  }
-  
-   
-
+  };
 
   return (
     <div className="new-plant-form">
       <h2>New Plant</h2>
-      <form onSubmit = {handleSubmit}>
-        <input type="text" name="name" placeholder="Plant name" />
-        <input type="text" name="image" placeholder="Image URL" />
-        <input type="number" name="price" step="0.01" placeholder="Price" />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Plant name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          name="image"
+          placeholder="Image URL"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+        />
+        <input
+          type="number"
+          name="price"
+          step="0.01"
+          placeholder="Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
         <button type="submit">Add Plant</button>
       </form>
     </div>
