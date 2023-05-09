@@ -19,8 +19,9 @@ function PlantList() {
       {plants.map((id,name, image, price) => (
         <PlantCard 
          key={id}
+         name = {name}
          id ={id}
-         Image={image}
+         image={image}
          price ={price}
       />
       )
